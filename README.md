@@ -27,8 +27,15 @@ cf cups fundingService -p '{"uri":"retailchannel.somedomain.com/deposit", "tag":
 
 The Gateway application will manifest (manifest.yml) that it needs one service whose name matches the User Provided Service we just created. PCF will assert that the service exists otherwise it won't less us deploy the Gateway application.
 <pre>
-...
-services:
+---
+applications:
+- name: gateway
+  memory: 1024M
+  instances: 1
+  path: target/gateway-0.0.1-SNAPSHOT.jar
+  host: gateway
+  domain: sysvs.mevansam.org
+  services:
   - accountService
   - fundingService
 </pre>
