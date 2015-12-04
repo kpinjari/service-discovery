@@ -150,3 +150,24 @@ And the expected outcome in the logs. See that one request was handled by APP/0 
 2015-12-04T17:15:27.80+0100 [APP/0]      OUT prepare accoutstatments for 34667
 2015-12-04T17:15:27.80+0100 [APP/1]      OUT prepare accoutstatments for 44566
 </pre>
+
+<h3>Consuming a Restful web service</h3>
+On this project, we have used Spring RestTemplate to access the RetailChannel's endpoints. In other branches we will explore more convenient mechanisms.
+<pre>
+@RestController
+@RequestMapping("/gateway")
+public class GatewayController {
+
+	@Autowired @Qualifier("accountService") Optional<WebServiceInfo> accountService;  
+	@Autowired RestTemplate restTemplate;
+		
+	@RequestMapping("/{account}/statements")
+	public List<AccountTransaction> accountStatement(@PathVariable("account") String account) {
+		String url = accountService.get().getUri() + "/" + account;
+		ResponseEntity<List<AccountTransaction>> rateResponse = restTemplate.exchange(url,
+                    HttpMethod.GET, null, new ParameterizedTypeReference<List<AccountTransaction>>() {
+            	});
+		List<AccountTransaction> statements = rateResponse.getBody();
+		return statements;
+	}
+</pre>
