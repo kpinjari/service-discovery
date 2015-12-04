@@ -1,8 +1,8 @@
 # service-discovery
 This project has been created to demonstrate how we can do service discovery in CF. There are several ways of doing it. Each way will be modeled as a branch. The trunk/master will cover "Service discovery using User Provided Services".
 
-<h1>Service Discovery using User Provider Service mechanism<h1>
-<h2>Overview<h2>
+<h2>Service Discovery using User Provider Service mechanism</h2>
+<h3>Overview</h3>
 The goal is to connect or wire a consumer application (in this project is Gateway) and a producer application (RetailChannel) without using properties file to set the location of the producer application.
 To do so we are going to use User Provided Service mechanism available in Cloud Foundry (and in any PaaS I would say). This mechanism and the code used to illustrate this solution could have been done in any programming language, or in Java without spring or in older versions of Spring. In other words, if we are using Spring in our project we don't need the latest Spring (4.2.x) to use this mechanism.
 
@@ -102,7 +102,7 @@ public class CloudConfig {
 And also to the utility project, cloud-web-service-creator. This project configures Cloud Foundry so that it can convert our user provided services tagged as "WebService" into a WebServiceInfo class which facilitates the url of the user-provided-service.
 
 
-<h2>Instructions how to use it</h2>
+<h3>Instructions how to use it</h3>
 Build the projects
 <code>
 cloud-web-service-creator\mvn install
