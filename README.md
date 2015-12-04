@@ -21,8 +21,8 @@ The RetailChannel may be such application that exposes multiple services each on
 First of all we deploy the RetailChannel application. And then we create a User Provided Service with the url of the RetailChannel application.
 
 <pre>
-cf cups accountService -p '{"uri":"retailchannel.somedomain.com/account"}
-cf cups fundingService -p '{"uri":"retailchannel.somedomain.com/deposit"}'
+cf cups accountService -p '{"uri":"retailchannel.somedomain.com/account", "tag":"WebService"}'
+cf cups fundingService -p '{"uri":"retailchannel.somedomain.com/deposit", "tag":"WebService"}'
 </pre>
 
 The Gateway application will manifest (manifest.yml) that it needs one service whose name matches the User Provided Service we just created. PCF will assert that the service exists otherwise it won't less us deploy the Gateway application.
