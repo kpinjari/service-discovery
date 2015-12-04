@@ -123,8 +123,8 @@ retailChannel\mvn install
 Deploy and create user provided services
 <pre>
 retailChannel\cf push
-cf cups accountService -p '{"uri":"retailchannel.somedomain.com/account"}
-cf cups fundingService -p '{"uri":"retailchannel.somedomain.com/deposit"}'
+cf cups accountService -p '{"uri":"retailchannel.somedomain.com/account", "tag":"WebService"}'
+cf cups fundingService -p '{"uri":"retailchannel.somedomain.com/deposit", "tag":"WebService"}'
 gateway\cf push
 </pre>
 
