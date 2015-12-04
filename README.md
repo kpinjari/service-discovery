@@ -134,3 +134,19 @@ curl gateway.somedomain.com/gateway/34667/statements
 </pre>
 
 This request will in turn call retailChannel.somedomain.com/account/34667
+
+<h3>Scaling RetailChannel application</h3>
+It is worth noting that in the manifest of the RetailChannel application we specified 2 instances. This means that the calls from the Gateway application into the RetailChannel application are load balanced. To probe it tail the logs of the retailChannel and try a few request to the gateway application. 
+<pre>
+cf logs retailChannel
+</pre>
+In a separate terminal run
+<pre>
+retailChannel.somedomain.com/account/34667
+retailChannel.somedomain.com/account/44566
+</pre>
+And the expected outcome in the logs. See that one request was handled by APP/0 and the other by APP/1.
+<pre>
+2015-12-04T17:15:27.80+0100 [APP/0]      OUT prepare accoutstatments for 34667
+2015-12-04T17:15:27.80+0100 [APP/1]      OUT prepare accoutstatments for 44566
+</pre>
