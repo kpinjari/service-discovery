@@ -109,7 +109,7 @@ public class CloudConfig {
 }
 </pre>
 
-And also to the utility project, cloud-web-service-creator. This project configures Cloud Foundry so that it can convert our user provided services tagged as "WebService" into a WebServiceInfo class which facilitates the url of the user-provided-service.
+WebServiceInfo class is declared in utility project, cloud-web-service-creator which is part of this solution. This project configures Cloud Foundry so that it can convert our user provided services tagged with the name "WebService" (look at how we created the user provided service above) into a WebServiceInfo class. 
 
 
 <h3>Instructions how to use it</h3>
