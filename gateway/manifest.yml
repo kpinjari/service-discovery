@@ -1,0 +1,11 @@
+---
+applications:
+- name: gateway
+  memory: 1024M
+  instances: 1
+  path: target/gateway-0.0.1-SNAPSHOT.jar
+  host: gateway
+  domain: sysvs.mevansam.org
+  services:
+  - accountService
+  - fundingService

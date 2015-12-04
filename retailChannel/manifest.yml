@@ -1,0 +1,8 @@
+---
+applications:
+- name: retailChannel
+  memory: 1024M
+  instances: 2
+  path: target/retailChannel-0.0.1-SNAPSHOT.jar
+  host: retailchannel
+  domain: sysvs.mevansam.org
