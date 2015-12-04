@@ -68,7 +68,7 @@ The Gateway application starts up with its environment variable <a href="https:/
  }
  </pre>
 
-There is a mechanism provided via the spring-cloud-cloudfoundry-connector project that allows an application to easily access this environment variable.
+There is a mechanism provided via the <a href="https://github.com/spring-cloud/spring-cloud-connectors/tree/master/spring-cloud-cloudfoundry-connector">spring-cloud-cloudfoundry-connector</a> project that allows an application to easily access this environment variable.
 
 The Gateway application can easily access the url of these two REST endpoints as follows:
 
