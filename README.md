@@ -34,7 +34,7 @@ applications:
   instances: 1
   path: target/gateway-0.0.1-SNAPSHOT.jar
   host: gateway
-  domain: sysvs.mevansam.org
+  domain: somedomain.com
   services:
   - accountService
   - fundingService
