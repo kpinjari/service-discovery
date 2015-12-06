@@ -4,7 +4,7 @@ This project has been created to demonstrate how we can do service discovery in 
 <h2>Service Discovery using User Provider Service mechanism</h2>
 <h3>Overview</h3>
 The goal is to connect or wire a consumer application (in this project is Gateway) and a producer application (RetailChannel) without using properties file to set the location of the producer application.
-To do so we are going to use <a href="https://docs.run.pivotal.io/devguide/services/user-provided.html">User Provided Service</a> mechanism available in Cloud Foundry (and in any PaaS I would say). This mechanism and the code used to illustrate this solution could have been done in any programming language, or in Java without spring or in older versions of Spring. In other words, if we are using Spring in our project we don't need the latest Spring (4.2.x) to use this mechanism.
+To do so we are going to use <a href="https://docs.run.pivotal.io/devguide/services/user-provided.html">User Provided Service</a> mechanism available in Cloud Foundry (and in any PaaS I would say). We could have implemented this solution in other programming language support by CF, or in Java without Spring Framework or in older versions of Spring Framework. In other words, if we are using Spring in our project we don't need the latest Spring (4.2.x) to use this mechanism.
 
 The scenario is this:
 <pre>
@@ -18,7 +18,7 @@ The RetailChannel may be such application that exposes multiple services each on
  retailChannel.somedomain.com/funding -> services deposits related functionality
 </pre>
 
-First of all we deploy the RetailChannel application. And then we create a User Provided Service with the url of the RetailChannel application.
+First of all we deploy the RetailChannel application. The team responsible of this service are also who create a User Provided Service with the url of the RetailChannel application.
 
 <pre>
 cf cups accountService -p '{"uri":"retailchannel.somedomain.com/account", "tag":"WebService"}'
