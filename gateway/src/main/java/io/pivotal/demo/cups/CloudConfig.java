@@ -1,7 +1,9 @@
 package io.pivotal.demo.cups;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.Cloud;
 import org.springframework.cloud.CloudFactory;
+import org.springframework.cloud.service.common.RelationalServiceInfo;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -26,5 +28,9 @@ public class CloudConfig {
 	@Bean WebServiceInfo fundingService(Cloud cloud) {
 		return (WebServiceInfo)cloud.getServiceInfo("fundingService");
 	}
+	@Bean RelationalServiceInfo oracle(Cloud cloud) {
+		return (RelationalServiceInfo)cloud.getServiceInfo("oracle");
+	}
+	
 
 }

@@ -7,6 +7,7 @@ import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.cloud.service.common.RelationalServiceInfo;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,8 @@ public class GatewayController {
 	
 	@Autowired @Qualifier("accountService") Optional<WebServiceInfo> accountService;  
 	@Autowired @Qualifier("fundingService") Optional<WebServiceInfo> fundingService;  
+	@Autowired @Qualifier("oracle") Optional<RelationalServiceInfo> oracle;
+	@Autowired @Qualifier("db2") Optional<RelationalServiceInfo> db2;
 	
 	@Autowired RestTemplate restTemplate;
 	
@@ -30,6 +33,8 @@ public class GatewayController {
 	public void printCloudSettings () {
 		System.out.println("AccountService: " + (accountService.isPresent() ? accountService.get() : " not present"));
 		System.out.println("FundingService: " + (fundingService.isPresent() ? fundingService.get() : " not present"));
+		System.out.println("oracle: " + (oracle.isPresent() ? oracle.get().getJdbcUrl() : " not present"));
+		System.out.println("db2: " + (db2.isPresent() ? db2.get() : " not present"));
 		
 	}
 	
