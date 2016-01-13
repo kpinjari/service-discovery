@@ -1,5 +1,6 @@
 # service-discovery
 This project has been created to demonstrate how we can do service discovery in CF. There are several ways of doing it. Each way will be modeled as a branch. The trunk/master will cover "Service discovery using User Provided Services".
+In addition to service discovery, this project also demonstrate how we can run the same application in the cloud and locally without doing any code changes. Our sample application called gateway requires an Oracle Database. Cloud Foundry service connector supports Oracle as one of its services. However, Local Config service connector does not therefore we are going to demostrate how to add an OracleServiceInfoCreator. 
 
 <h2>Service Discovery using User Provider Service mechanism</h2>
 <h3>Overview</h3>
@@ -171,3 +172,38 @@ public class GatewayController {
 		return statements;
 	}
 </pre>
+
+
+<h2>How to make the LocalConfig connector to support Oracle database</h2>
+
+We proceed the same way we did it for the WebServiceInfoCreator class. In the project cloud-web-service-creator (we should consider renaming that project or create two distinct projects one for cloudFoundry and another for localconfig) we add a new package for localConfig where we are going to add our OracleServiceInfoCreator and WebServiceInfoCreator classes. We also a new file (META-INF/services/org.springframework.cloud.localconfig.LocalConfigServiceInfoCreator) under src/main/resources where we list our two service creators.
+<pre>
+io.pivotal.demo.cups.cloud.local.WebServiceInfoCreator
+io.pivotal.demo.cups.cloud.local.OracleServiceInfoCreator
+</pre>
+
+That's it. Now, we can run our applications locally. See next section on how to run the application locally.
+
+Note about OracleServiceInfoCreator: Oracle requires a connection url incompatible with the standard urls supported by databases like mongodb or mysql. It is for this reason that first of all, we use the same url we specified in the cloud, i.e jdbc:oracle ... And second, we shall only rely on the getJdbcUrl() method in the class RelationalServiceInfo in order to get the connection url. In other words, we shall not rely on the methods getUsername(), etc, because they will be null.
+
+<h2>How to make the application run in local mode</h2>
+There are different ways of doing it (full description of all options <a href="http://cloud.spring.io/spring-cloud-connectors/spring-cloud-connectors.html#_local_configuration_connector">here</a>). In the gateway project we have created a spring-cloud-bootstrap.properties which tells the local connector to look up for the service definitions in a file called spring-local-cloud.properties. In practice, this file should be outside this project and hence not in github because this file contains passwords. Instead, this file should be in the user.home directory. 
+This is the content of the spring-cloud-bootstrap.properties:
+<pre>
+spring.cloud.propertiesFile=src/main/resources/spring-local-cloud.properties
+</pre>
+
+The LocalConfig is activated provided the spring-local-cloud.properties file contains a property called <b>spring.cloud.appId</b>. Additionally, we define our services' url and database's connection urls as follows:
+<pre>
+spring.cloud.appId=gateway
+spring.cloud.accountService=http://myhost-account:90
+spring.cloud.fundingService=http://myhost-funding:90
+
+spring.cloud.oracle=jdbc:oracle:thin:userId/password@192.168.127.1:2000/DHKTLRDB
+</pre>
+
+Important: Spring Cloud will first check whether it is running under various cloud providers like Cloud Foundry before checking whether it is running locally. It is for this reason that you should not have in your local environment any VCAP_* properties declared. 
+
+
+
+
