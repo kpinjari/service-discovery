@@ -176,7 +176,7 @@ public class GatewayController {
 
 <h2>How to make the LocalConfig connector to support Oracle database</h2>
 
-We proceed the same way we did it for the WebServiceInfoCreator class. In the project cloud-web-service-creator (we should consider renaming that project or create two distinct projects one for cloudFoundry and another for localconfig) we add a new package for localConfig where we are going to add our OracleServiceInfoCreator and WebServiceInfoCreator classes. We also a new file (META-INF/services/org.springframework.cloud.localconfig.LocalConfigServiceInfoCreator) under src/main/resources where we list our two service creators.
+We proceed the same way we did it for the WebServiceInfoCreator class. In the project cloud-web-service-creator (we should consider renaming that project or create two distinct projects one for cloudFoundry and another for localconfig) we add a new package for localConfig where we are going to add our OracleServiceInfoCreator and WebServiceInfoCreator classes. We also add a new file called META-INF/services/org.springframework.cloud.localconfig.LocalConfigServiceInfoCreator under src/main/resources where we list our two service creators.
 <pre>
 io.pivotal.demo.cups.cloud.local.WebServiceInfoCreator
 io.pivotal.demo.cups.cloud.local.OracleServiceInfoCreator
